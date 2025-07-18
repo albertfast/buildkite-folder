@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+# Eğer klasör bir git repo değilse scripti atla
+if [ ! -d "$BUILDKITE_FOLDER_GIT_REPO_PATH/.git" ]; then
+  echo "⚠️  Skipping buildkite-folder clone, not a valid git repo at $BUILDKITE_FOLDER_GIT_REPO_PATH"
+  exit 0
+fi
+
+export DAGSTER_GIT_REPO_DIR=/workdir
+
+bash scripts/copy_buildkite_folder.sh
+
+
